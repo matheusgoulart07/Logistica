@@ -1,12 +1,20 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout(){
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: '#8B0000',
+                tabBarActiveTintColor: 'black',
+                headerStyle: {
+                    backgroundColor: '#3A3F45',
+                },
+                headerShadowVisible: false,
+                headerTintColor: '#fd6402',
+                tabBarStyle: {
+                    backgroundColor: '#3A3F45' 
+                }
             }}
         >
             <Tabs.Screen
@@ -14,7 +22,7 @@ export default function TabLayout(){
                 options={{
                     title: 'Inicio',
                     tabBarIcon: ({ color, focused }) => (
-                       <Ionicons name={focused ? "car-sport" : "car-sport-outline" } color={color} size={24} />   
+                       <Ionicons name={focused ? "car-sport" : "car-sport-outline" } color={'#fd6402'} size={24} />   
                     ),
                 }}
                 />
@@ -23,7 +31,7 @@ export default function TabLayout(){
                     options={{
                         title: 'Sobre',
                         tabBarIcon: ({ color, focused }) => (
-                            <FontAwesome name={focused ? "vcard" : "vcard-o" } color={color} size={24} />
+                            <FontAwesome name={focused ? "vcard" : "vcard-o" } color={'#fd6402'} size={24} />
                     ),
                 }}
             />

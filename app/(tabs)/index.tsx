@@ -15,16 +15,16 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FF8C00',
+    backgroundColor: '#2C2F33',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    color: '#000',
+    color: '#FFF',
   },
   button: {
     fontSize: 20,
     textDecorationLine: 'underline',
-    color: '#000',
+    color: '#fd6402',
   }
 });
