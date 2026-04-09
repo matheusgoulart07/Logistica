@@ -7,11 +7,11 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Lista de Tarefas</Text>
+            <Text style={styles.titulo}>Lista de Entregas</Text>
         <View style={styles.inputContainer}>
             <TextInput
                 style={styles.input}
-                placeholder="Digite uma tarefa..."
+                placeholder="Adicionar uma rota..."
                 placeholderTextColor="#fff"
                 value={novaTarefa}
                 onChangeText={setNovaTarefa}
