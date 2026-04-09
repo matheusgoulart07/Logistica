@@ -35,6 +35,15 @@ export default function TabLayout(){
                     ),
                 }}
             />
+                <Tabs.Screen
+                    name="toDoList"
+                    options={{
+                        title: 'A Fazer',
+                        tabBarIcon: ({ color, focused }) => (
+                            <Ionicons name={focused ? "newspaper" : "newspaper-outline" } color={'#fd6402'} size={24} />
+                    ),
+                }}
+            />
         </Tabs>
     );
 }
