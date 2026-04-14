@@ -7,7 +7,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Lista de Entregas</Text>
+            <Text style={styles.titulo}>Lista de Rotas</Text>
         <View style={styles.inputContainer}>
             <TextInput
                 style={styles.input}
@@ -16,7 +16,7 @@ export default function App() {
                 value={novaTarefa}
                 onChangeText={setNovaTarefa}
             />
-            <Button title="Adicionar" onPress={adicionarTarefa} color="green" />
+            <Button title="Adicionar" onPress={adicionarTarefa} color="#5865F2" />
             </View>
 
         <FlatList

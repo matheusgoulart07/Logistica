@@ -50,7 +50,7 @@ export default function TabLayout(){
                     options={{
                         title: 'Rotas',
                         tabBarIcon: ({ color, size }) => (
-                             <MaterialIcons name="alt-route" size={size} color={color} />
+                             <FontAwesome name="arrows-alt" size={size} color={'#fd6402'} />
                     ),
                 }}
             />
