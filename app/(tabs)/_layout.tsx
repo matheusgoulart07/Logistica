@@ -1,5 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from 'expo-router';
 
 export default function TabLayout(){
@@ -41,6 +42,15 @@ export default function TabLayout(){
                         title: 'A Fazer',
                         tabBarIcon: ({ color, focused }) => (
                             <Ionicons name={focused ? "newspaper" : "newspaper-outline" } color={'#fd6402'} size={24} />
+                    ),
+                }}
+            />
+                <Tabs.Screen
+                    name="routes"
+                    options={{
+                        title: 'Rotas',
+                        tabBarIcon: ({ color, size }) => (
+                             <MaterialIcons name="alt-route" size={size} color={color} />
                     ),
                 }}
             />
