@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
 
-const PlaceholderImage = require('@/assets/images/imagemLogistica2.jpg');
+const PlaceholderImage = require('@/assets/images/imagemLogistica.jpg');
 
 export default function Index() {
 
@@ -32,7 +32,7 @@ export default function Index() {
           <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
         </View>
         <View style={styles.footerContainer}>
-          <Button theme="primary" label="Choose a photo" />
+          <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
           <Button label="Use a foto" />
         </View>
     </View>
