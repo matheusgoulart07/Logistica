@@ -1,12 +1,12 @@
 import * as Location from "expo-location";
 import React, { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function RastreamentoScreen() {
@@ -20,8 +20,7 @@ export default function RastreamentoScreen() {
     try {
       setLoading(true);
 
-      const { status } =
-        await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
         Alert.alert(
@@ -32,19 +31,36 @@ export default function RastreamentoScreen() {
       }
 
       const location = await Location.getCurrentPositionAsync({});
+      const lat = location.coords.latitude;
+      const lon = location.coords.longitude;
 
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
+      setLatitude(lat);
+      setLongitude(lon);
 
-      const endereco = await Location.reverseGeocodeAsync({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+      // --- INTEGRAÇÃO COM A API NOMINATIM ---
+      const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+      
+      const resposta = await fetch(url, {
+        headers: {
+          "User-Agent": "MeuAppRastreio/1.0 (contato@seuemail.com)", 
+        },
       });
 
-      if (endereco.length > 0) {
-        setCidade(endereco[0].city || "Não encontrado");
-        setEstado(endereco[0].region || "Não encontrado");
+      const dados = await resposta.json(); // Corrigido aqui!
+
+      if (dados && dados.address) {
+        // O Nominatim pode retornar 'city', 'town' ou 'village' dependendo da região
+        const nomeCidade = dados.address.city || dados.address.town || dados.address.village || "Não encontrado";
+        const nomeEstado = dados.address.state || "Não encontrado";
+
+        setCidade(nomeCidade);
+        setEstado(nomeEstado);
+      } else {
+        setCidade("Não encontrado");
+        setEstado("Não encontrado");
       }
+      // --------------------------------------
+
     } catch (error) {
       Alert.alert("Erro", "Não foi possível obter a localização.");
       console.log(error);
