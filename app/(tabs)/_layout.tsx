@@ -1,6 +1,6 @@
+import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from 'expo-router';
 
 export default function TabLayout(){
@@ -51,6 +51,15 @@ export default function TabLayout(){
                         title: 'Rotas',
                         tabBarIcon: ({ color, size }) => (
                              <FontAwesome name="arrows-alt" size={size} color={'#fd6402'} />
+                    ),
+                }}
+            />
+                <Tabs.Screen
+                    name="rastreamento"
+                    options={{
+                        title: 'Rastreio',
+                        tabBarIcon: ({ color, size }) => (
+                             <AntDesign name="environment" size={size} color={'#fd6402'} />
                     ),
                 }}
             />
