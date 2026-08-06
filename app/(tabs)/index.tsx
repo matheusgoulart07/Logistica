@@ -1,17 +1,17 @@
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
-import { StyleSheet, View, ImageSourcePropType } from "react-native"; 
-import { useState, useRef } from 'react';
+import * as MediaLibrary from 'expo-media-library';
+import { useRef, useState } from 'react';
+import { ImageSourcePropType, StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { captureRef } from 'react-native-view-shot';
 
 import Button from '@/components/Button';
 import CircleButton from '@/components/CircleButton';
-import EmojiPicker from '@/components/EmojiPicker';
 import EmojiList from '@/components/EmojiList';
+import EmojiPicker from '@/components/EmojiPicker';
+import EmojiSticker from '@/components/EmojiSticker';
 import IconButton from '@/components/IconButton';
 import ImageViewer from '@/components/ImageViewer';
-import EmojiSticker from '@/components/EmojiSticker';
 
 const PlaceholderImage = require('@/assets/images/imagemLogistica.jpg');
 
@@ -23,6 +23,8 @@ export default function Index() {
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
   const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType | undefined>(undefined);
+  // const [permissionResponse, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [permissionResponse, requestCameraPermission] = ImagePicker.useCameraPermissions();
 
   // SOLUÇÃO SLIDE 1: Solicitar permissão se o status for null ao carregar
   if (status === null) {
@@ -40,6 +42,25 @@ export default function Index() {
       setSelectedImage(result.assets[0].uri);
     } else {
       alert('You did not select any image.');
+    }
+  };
+
+   const takePhotoAsync = async() => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (!permission.granted) {
+      alert("Permissão de câmera necessária par tirar a foto.");
+      return;
+    }
+
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+      setShowAppOptions(true);
     }
   };
 
@@ -94,6 +115,7 @@ export default function Index() {
       ) : (
         <View style={styles.footerContainer}>
           <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+          <Button label="Take a photo" onPress={takePhotoAsync} />                 
           <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
         </View>
       )}
@@ -132,4 +154,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   }
+  
 });

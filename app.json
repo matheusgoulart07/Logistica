@@ -24,7 +24,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
+     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
@@ -38,9 +38,15 @@
           }
         }
       ],
-      "expo-font",
-      "expo-web-browser"
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O $(PRODUCT_NAME) precisa acessar sua galeria para escolher fotos",
+          "cameraPermission": "O $(PRODUCT_NAME) precisa acessar sua câmera para tirar fotos"
+        }
+      ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
